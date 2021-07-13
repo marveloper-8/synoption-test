@@ -1,0 +1,81 @@
+.table-page{
+    width:90vw;
+    margin:25px auto;
+    .table-page-inner{
+        .table-head{
+            padding:10px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .table-container{
+            padding:25px;
+            .tab-navigation{
+                display:grid;
+                grid-template-columns:repeat(5, 20%);
+                border-radius:4px;
+                border:1.5px solid #fff;
+                .tab{
+                    border-right:1.5px solid #fff;
+                    padding:10px;
+                    text-align:center;
+                    display:inline-block;
+                    font-weight:bold;
+                    cursor:pointer;
+                    transition:.4s ease-in-out background;
+                    &:hover{
+                        background:#293459;
+                        transition:.4s ease-in-out background;
+                    }
+                    &:first-child{
+                        border-radius:4px 0 0 4px;
+                    }
+                    &:last-child{
+                        border:none;
+                        border-radius:0 4px 4px 0;
+                    }
+                }
+                .active{
+                    border:1.5px solid #ABA9FF;
+                    &:hover{
+                        background:#ABA9FF;
+                    }
+                }
+            }
+            table{
+                border-collapse:collapse;
+                width:100%;
+                margin-top:20px;
+                thead{
+                    border-bottom:.5px solid #293459;
+                    th{
+                        color:#FD6244;
+                        border-right:.5px solid #293459;
+                        padding:15px;
+                        &:last-child{
+                            border:none;
+                        }
+                        img{
+                            width:10px;
+                            margin-left:10px;
+                        }
+                    }
+                }
+                tr{
+                    text-align:center;
+                    &:nth-child(odd){
+                        background:#111C45;
+                    }
+                    td{
+                        padding:15px;
+                        border-right:.5px solid #293459;
+                        &:last-child{
+                            border:none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
