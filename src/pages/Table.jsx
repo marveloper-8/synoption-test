@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import "./styles/table.scss";
 // icons
 import arrow from '../icons/arrow.svg'
+import robot from "../icons/robot.svg";
 // components
 import Empty from '../components/Empty'
 import Loader from '../components/Loader'
@@ -24,13 +25,11 @@ const Table = (e) => {
         .then((res) => res.json())
         .then((result) => {
           setTable1(result.posts);
-          console.log(result.posts);
         });
       fetch("https://synoption-test.herokuapp.com/call-put-table")
         .then((res) => res.json())
         .then((result) => {
           setTable2(result.collections);
-          console.log(result.collections);
         });
     }
     
@@ -43,14 +42,13 @@ const Table = (e) => {
         });
     }, []);
 
-  console.log(table1)
   const [active, setActive] = useState("rr");
   return (
     <div className="table-page bg-1">
       <div className="table-page-inner">
         <div className="table-head font-20 bg-2">
-          <div>{`>>`} Single Currency Grid</div>
-          <div>&times;</div>
+          <div className="title">{`>>`} Single Currency Grid</div>
+          <div><img src={robot} alt="robot" /> &times;</div>
         </div>
         <div className="table-container">
           <div className="tab-navigation">
@@ -93,7 +91,9 @@ const Table = (e) => {
             ) : (
               <>
                 {active === "rr" &&
-                  (table1.length < 1 ? (
+                  (!table1 ? (
+                    <Loader />
+                  ) : table1.length < 1 ? (
                     <Empty text="RR/BF unavailable" />
                   ) : (
                     <>
@@ -109,20 +109,23 @@ const Table = (e) => {
                             10d B/F <img src={arrow} alt="arrow" />
                           </th>
                         </thead>
-                        {table1.map((item) => {
-                          console.log(item);
-                          return (
-                            <tr>
-                              <td>{item.measurement}</td>
-                              <td>{item.expDate}</td>
-                              <td>{item.atm}</td>
-                              <td>{item.rr_25d}</td>
-                              <td>{item.rr_10d}</td>
-                              <td>{item.bf_25d}</td>
-                              <td>{item.bf_10d}</td>
-                            </tr>
-                          );
-                        })}
+                        {!table1 ? (
+                          <Loader />
+                        ) : (
+                          table1.map((item) => {
+                            return (
+                              <tr>
+                                <td>{item.measurement}</td>
+                                <td>{item.expDate}</td>
+                                <td>{item.atm}</td>
+                                <td>{item.rr_25d}</td>
+                                <td>{item.rr_10d}</td>
+                                <td>{item.bf_25d}</td>
+                                <td>{item.bf_10d}</td>
+                              </tr>
+                            );
+                          })
+                        )}
                       </table>
                     </>
                   ))}
@@ -133,7 +136,9 @@ const Table = (e) => {
             ) : (
               <>
                 {active === "call" &&
-                  (table2.length < 1 ? (
+                  (!table2 ? (
+                    <Loader />
+                  ) : table2.length < 1 ? (
                     <Empty text="Call/Put unavailable" />
                   ) : (
                     <>
@@ -149,20 +154,23 @@ const Table = (e) => {
                             10d B/F <img src={arrow} alt="arrow" />
                           </th>
                         </thead>
-                        {table2.map((item) => {
-                          console.log(item);
-                          return (
-                            <tr>
-                              <td>{item.measurement}</td>
-                              <td>{item.expDate}</td>
-                              <td>{item.atm}</td>
-                              <td>{item.rr_25d}</td>
-                              <td>{item.rr_10d}</td>
-                              <td>{item.bf_25d}</td>
-                              <td>{item.bf_10d}</td>
-                            </tr>
-                          );
-                        })}
+                        {!table2 ? (
+                          <Loader />
+                        ) : (
+                          table2.map((item) => {
+                            return (
+                              <tr>
+                                <td>{item.measurement}</td>
+                                <td>{item.expDate}</td>
+                                <td>{item.atm}</td>
+                                <td>{item.rr_25d}</td>
+                                <td>{item.rr_10d}</td>
+                                <td>{item.bf_25d}</td>
+                                <td>{item.bf_10d}</td>
+                              </tr>
+                            );
+                          })
+                        )}
                       </table>
                     </>
                   ))}
@@ -189,7 +197,6 @@ const Table = (e) => {
                 {active === "heatmaps" && <Empty text="Heatmaps unavailable" />}
               </>
             )}
-
           </div>
         </div>
       </div>

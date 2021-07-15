@@ -7,6 +7,12 @@
             display:flex;
             align-items:center;
             justify-content:space-between;
+            .title{
+                font-family: 'Sarpanch', sans-serif;
+            }
+            img{
+                height:12.5px;
+            }
         }
         .table-container{
             padding:25px;
