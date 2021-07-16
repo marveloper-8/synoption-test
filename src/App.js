@@ -1,6 +1,6 @@
 import React from "react";
 // components
-import Table from "./pages/Table";
+import Table from "./pages/TableWebSocket";
 // styling
 import "./App.scss";
 
